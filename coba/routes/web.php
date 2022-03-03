@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\About;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,31 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-});
-
 Route::get('/about', function () {
-
-
     return view('about', [
-        "name" => "AULIA KHANSA DAMARANI",
-        "age" => 22,
-        "img" => "foto.jpeg"
+        "cd" => 'About',
+        "film" => About::all()
     ]);
 });
 
-
-Route::get('/post', function () {
-    $isi = [
-        [
-            "title" => "Awal",
-            "content" => "lorem ipsum dolar siamet"
-        ],
-        [
-            "title" => "kedua",
-            "content" => "lorem ipsum dolar siamet"
-        ]
-    ];
-    return view('post', ["isi" => $isi]);
+Route::get('/about/{$slug}', function ($slug) {
+    return view('find_about', [
+        "cd" => 'About',
+        "film" => About::find($slug)
+    ]);
 });
